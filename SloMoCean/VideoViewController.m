@@ -13,7 +13,7 @@
 
 static void * sessionRunningContext = &sessionRunningContext;
 
-typedef NS_ENUM(NSInteger, SloMoCameSetupResult){
+typedef NS_ENUM(NSInteger, SloMoCamSetupResult){
     SloMoCamSetupResultSuccess,
     SloMoCamSetupResultCameraNotAuthorized,
     SloMoCamSetupResultSessionConfigurationFailed
@@ -37,7 +37,7 @@ typedef NS_ENUM(NSInteger, SloMoCameSetupResult){
 @property (nonatomic) AVCaptureMovieFileOutput *movieFileOutput;
 
 //Utilities
-@property (nonatomic) SloMoCameSetupResult setupResult;
+@property (nonatomic) SloMoCamSetupResult setupResult;
 @property (nonatomic, getter=isSessionRunning) BOOL sessionRunning;
 @property (nonatomic) UIBackgroundTaskIdentifier backgroundRecordingID;
 
@@ -152,6 +152,8 @@ typedef NS_ENUM(NSInteger, SloMoCameSetupResult){
             case SloMoCamSetupResultSuccess:
             {
                 [self addObservers];
+                [self.session startRunning];
+                self.sessionRunning = self.session.isRunning;
                 break;
             }
             case SloMoCamSetupResultCameraNotAuthorized:
@@ -239,7 +241,7 @@ typedef NS_ENUM(NSInteger, SloMoCameSetupResult){
     [defaultCenter addObserver:self selector:@selector(subjectAreaDidChange:) name:AVCaptureDeviceSubjectAreaDidChangeNotification object:self.videoDeviceInput.device];
     [defaultCenter addObserver:self selector:@selector(sessionRuntimeError:) name:AVCaptureSessionRuntimeErrorNotification object:self.session];
     [defaultCenter addObserver:self selector:@selector(sessionWasInterrupted:) name:AVCaptureSessionWasInterruptedNotification object:self.session];
-    [defaultCenter addObserver:self selector:@selector(sessionWasInterrupted:) name:AVCaptureSessionInterruptionEndedNotification object:self.session];
+    [defaultCenter addObserver:self selector:@selector(sessionInterruptionEnded:) name:AVCaptureSessionInterruptionEndedNotification object:self.session];
 }
 
 -(void) removeObservers
@@ -455,7 +457,20 @@ typedef NS_ENUM(NSInteger, SloMoCameSetupResult){
 
 -(void)captureOutput:(AVCaptureFileOutput *)captureOutput didFinishRecordingToOutputFileAtURL:(NSURL *)outputFileURL fromConnections:(NSArray *)connections error:(NSError *)error
 {
+    UIBackgroundTaskIdentifier currentBackgroundRecordingID = self.backgroundRecordingID;
+    self.backgroundRecordingID = UIBackgroundTaskInvalid;
     
+    
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.cameraButton.enabled = ([AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo].count > 1);
+        self.recordButton.enabled = YES;
+        [self.recordButton setTitle:@"Record" forState:UIControlStateNormal];
+    });
+    
+    if (currentBackgroundRecordingID != UIBackgroundTaskInvalid) {
+        [[UIApplication sharedApplication] endBackgroundTask:currentBackgroundRecordingID];
+    }
 }
 
 #pragma  mark - Device Configuration

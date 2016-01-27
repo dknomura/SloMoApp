@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Video.h"
+#import "PersistenceController.h"
 
-@interface VideoLibraryAccessObject : NSObject
+
+@interface VideoLibraryManager : NSObject
+-(void) moveNewVideoAtURL:(NSURL*)outputFileURL;
 
 @end

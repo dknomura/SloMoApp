@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PersistenceController.h"
 
 @interface VideoViewController : UIViewController
-
+@property (strong, nonatomic) PersistenceController *persistenceController;
 @end
