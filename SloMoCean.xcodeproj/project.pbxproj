@@ -15,6 +15,7 @@
 		AA7ECA451C46FA1800C6F936 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA7ECA431C46FA1800C6F936 /* LaunchScreen.storyboard */; };
 		AAB225551C57D41000592E2E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB225541C57D41000592E2E /* AVFoundation.framework */; };
 		AAB225581C57D89500592E2E /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB225571C57D89500592E2E /* VideoViewController.m */; };
+		AACC6D361C58B24600D81A35 /* VideoLibraryAccessObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AACC6D351C58B24600D81A35 /* VideoLibraryAccessObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,8 @@
 		AAB225541C57D41000592E2E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AAB225561C57D89500592E2E /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
 		AAB225571C57D89500592E2E /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
+		AACC6D341C58B24600D81A35 /* VideoLibraryAccessObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoLibraryAccessObject.h; sourceTree = "<group>"; };
+		AACC6D351C58B24600D81A35 /* VideoLibraryAccessObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoLibraryAccessObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +74,8 @@
 				AAB225571C57D89500592E2E /* VideoViewController.m */,
 				AA600D331C5826850092A614 /* PreviewView.h */,
 				AA600D341C5826850092A614 /* PreviewView.m */,
+				AACC6D341C58B24600D81A35 /* VideoLibraryAccessObject.h */,
+				AACC6D351C58B24600D81A35 /* VideoLibraryAccessObject.m */,
 				AA7ECA3E1C46FA1800C6F936 /* Main.storyboard */,
 				AA7ECA411C46FA1800C6F936 /* Assets.xcassets */,
 				AA7ECA431C46FA1800C6F936 /* LaunchScreen.storyboard */,
@@ -161,6 +166,7 @@
 			files = (
 				AA7ECA3A1C46FA1800C6F936 /* AppDelegate.m in Sources */,
 				AA600D351C5826850092A614 /* PreviewView.m in Sources */,
+				AACC6D361C58B24600D81A35 /* VideoLibraryAccessObject.m in Sources */,
 				AA7ECA371C46FA1800C6F936 /* main.m in Sources */,
 				AAB225581C57D89500592E2E /* VideoViewController.m in Sources */,
 			);
@@ -273,6 +279,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SloMoCean/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = danielnomura.SloMoCean;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -284,6 +291,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SloMoCean/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = danielnomura.SloMoCean;
 				PRODUCT_NAME = "$(TARGET_NAME)";

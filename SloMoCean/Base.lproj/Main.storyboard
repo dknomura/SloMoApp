@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Video View Controller-->
@@ -17,18 +18,52 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RHo-cz-nhN" customClass="PreviewView">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ct-Lq-gwT">
+                                        <rect key="frame" x="276" y="550" width="49" height="30"/>
+                                        <state key="normal" title="Record"/>
+                                        <connections>
+                                            <action selector="toggleMovieRecord:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Oyo-KA-TwS"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <gestureRecognizers/>
+                                <constraints>
+                                    <constraint firstItem="4Ct-Lq-gwT" firstAttribute="centerX" secondItem="RHo-cz-nhN" secondAttribute="centerX" id="GqN-nA-aqa"/>
+                                    <constraint firstAttribute="bottom" secondItem="4Ct-Lq-gwT" secondAttribute="bottom" constant="20" id="Jta-lE-hBQ"/>
+                                </constraints>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="ds8-Qs-XNi" appends="YES" id="wRv-jb-VzA"/>
+                                </connections>
+                            </view>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ciq-Bp-Xsf">
                                 <rect key="frame" x="272" y="285" width="55" height="30"/>
                                 <state key="normal" title="Resume"/>
+                                <connections>
+                                    <action selector="resumeInterruptedSession:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IQ3-h2-Tfc"/>
+                                </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="LZq-lp-xhS">
-                                <rect key="frame" x="245" y="550" width="110" height="31"/>
+                                <rect key="frame" x="70" y="550" width="110" height="31"/>
                                 <segments>
                                     <segment title="30"/>
                                     <segment title="60"/>
                                     <segment title="120"/>
                                 </segments>
+                                <connections>
+                                    <action selector="fpsSegmentControl:" destination="BYZ-38-t0r" eventType="valueChanged" id="KAv-ox-uvb"/>
+                                </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Xo-7x-AW4">
+                                <rect key="frame" x="20" y="20" width="54" height="30"/>
+                                <state key="normal" title="Camera"/>
+                                <connections>
+                                    <action selector="changeCamera:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yAZ-9p-dcJ"/>
+                                </connections>
+                            </button>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera Unavailable" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vu5-jW-kcx">
                                 <rect key="frame" x="224" y="290" width="152" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -42,51 +77,53 @@
                                     <segue destination="etl-Vv-Tdp" kind="presentation" id="z5t-M4-reL"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVZ-EZ-QVQ">
-                                <rect key="frame" x="284" y="520" width="31" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FPS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EVZ-EZ-QVQ">
+                                <rect key="frame" x="110" y="521" width="31" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Ct-Lq-gwT">
-                                <rect key="frame" x="50" y="550" width="49" height="30"/>
-                                <state key="normal" title="Record"/>
-                            </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RHo-cz-nhN" customClass="PreviewView">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="RHo-cz-nhN" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" id="2qG-tJ-JnX"/>
                             <constraint firstItem="vu5-jW-kcx" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="7mj-w2-t4J"/>
-                            <constraint firstItem="LZq-lp-xhS" firstAttribute="height" secondItem="9Ao-6R-BiT" secondAttribute="height" id="DEo-pX-2kL"/>
+                            <constraint firstItem="4Ct-Lq-gwT" firstAttribute="top" secondItem="9Ao-6R-BiT" secondAttribute="top" id="7qu-li-plP"/>
+                            <constraint firstItem="3Xo-7x-AW4" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="8IU-UK-zUL"/>
+                            <constraint firstItem="4Ct-Lq-gwT" firstAttribute="top" secondItem="LZq-lp-xhS" secondAttribute="top" id="8z0-S9-8cA"/>
+                            <constraint firstItem="4Ct-Lq-gwT" firstAttribute="height" secondItem="9Ao-6R-BiT" secondAttribute="height" id="Afv-0u-0Lc"/>
+                            <constraint firstItem="LZq-lp-xhS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="50" id="BFk-Pz-FfK"/>
+                            <constraint firstItem="LZq-lp-xhS" firstAttribute="top" secondItem="EVZ-EZ-QVQ" secondAttribute="bottom" constant="8" id="DYK-Bg-W5u"/>
                             <constraint firstItem="Ciq-Bp-Xsf" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FN5-Qi-nlI"/>
-                            <constraint firstItem="LZq-lp-xhS" firstAttribute="leading" secondItem="4Ct-Lq-gwT" secondAttribute="trailing" constant="146" id="Kbf-jH-0rH"/>
-                            <constraint firstItem="LZq-lp-xhS" firstAttribute="top" secondItem="4Ct-Lq-gwT" secondAttribute="top" id="MCc-jK-NtO"/>
+                            <constraint firstItem="LZq-lp-xhS" firstAttribute="baseline" secondItem="4Ct-Lq-gwT" secondAttribute="baseline" id="Ku5-h2-eaZ"/>
                             <constraint firstItem="RHo-cz-nhN" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Mjh-tL-8uc"/>
-                            <constraint firstItem="LZq-lp-xhS" firstAttribute="top" secondItem="9Ao-6R-BiT" secondAttribute="top" id="UkR-cK-tjX"/>
-                            <constraint firstItem="9Ao-6R-BiT" firstAttribute="leading" secondItem="LZq-lp-xhS" secondAttribute="trailing" constant="145" id="VML-vH-8m3"/>
+                            <constraint firstItem="4Ct-Lq-gwT" firstAttribute="baseline" secondItem="9Ao-6R-BiT" secondAttribute="baseline" id="Pm8-as-dip"/>
+                            <constraint firstItem="3Xo-7x-AW4" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="b1C-Er-rpG"/>
                             <constraint firstItem="vu5-jW-kcx" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dIa-M7-dA8"/>
                             <constraint firstItem="RHo-cz-nhN" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="jKc-6A-c30"/>
-                            <constraint firstItem="LZq-lp-xhS" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lfg-9a-vR8"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="LZq-lp-xhS" secondAttribute="bottom" constant="20" id="m4C-lL-cL0"/>
                             <constraint firstItem="Ciq-Bp-Xsf" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="prV-WW-H0v"/>
-                            <constraint firstItem="LZq-lp-xhS" firstAttribute="height" secondItem="4Ct-Lq-gwT" secondAttribute="height" id="r0c-ve-VIw"/>
+                            <constraint firstItem="4Ct-Lq-gwT" firstAttribute="height" secondItem="LZq-lp-xhS" secondAttribute="height" id="uOU-uk-lur"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9Ao-6R-BiT" secondAttribute="trailing" constant="32" id="uTh-nx-36v"/>
+                            <constraint firstItem="EVZ-EZ-QVQ" firstAttribute="centerX" secondItem="LZq-lp-xhS" secondAttribute="centerX" id="xe0-hs-2MB"/>
                             <constraint firstItem="RHo-cz-nhN" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="z9W-rg-hx1"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cameraButton" destination="3Xo-7x-AW4" id="dGz-8s-a42"/>
                         <outlet property="cameraUnavailableLabel" destination="vu5-jW-kcx" id="y2j-Zv-tJY"/>
-                        <outlet property="fpsControl" destination="LZq-lp-xhS" id="wOO-R7-R3f"/>
                         <outlet property="fpsSegControl" destination="LZq-lp-xhS" id="6uc-0t-VhY"/>
                         <outlet property="libraryButton" destination="9Ao-6R-BiT" id="JnK-7u-UR5"/>
+                        <outlet property="previewView" destination="RHo-cz-nhN" id="qiJ-fb-4yi"/>
                         <outlet property="recordButton" destination="4Ct-Lq-gwT" id="6xl-mt-yvO"/>
                         <outlet property="resumeRecording" destination="Ciq-Bp-Xsf" id="TWH-aA-QZj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="ds8-Qs-XNi">
+                    <connections>
+                        <action selector="focusAndExposureWithTap:" destination="BYZ-38-t0r" id="inC-OD-WgI"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-262" y="418"/>
         </scene>
@@ -104,7 +141,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="zj4-aN-0gc">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Reuse Identifier" id="zj4-aN-0gc">
                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
