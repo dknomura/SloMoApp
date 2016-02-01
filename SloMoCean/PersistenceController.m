@@ -14,12 +14,12 @@
 @property (strong) NSManagedObjectContext *privateContext;
 @property (copy) InitCallbackBlock initCallback;
 
--(void) initializeCoreData;
-
 @end
 
 
 @implementation PersistenceController
+
+
 #pragma mark - CoreData Methods
 
 -(instancetype) initWithCallback:(InitCallbackBlock)callback
@@ -49,6 +49,7 @@
     self.managedObjectContext = [[NSManagedObjectContext alloc]initWithConcurrencyType:NSMainQueueConcurrencyType];
     self.privateContext = [[NSManagedObjectContext alloc]initWithConcurrencyType:NSPrivateQueueConcurrencyType];
     
+    self.managedObjectContext.undoManager = [[NSUndoManager alloc] init];
     self.privateContext.persistentStoreCoordinator = coordinator;
     self.managedObjectContext.parentContext = self.privateContext;
     
@@ -68,7 +69,7 @@
         if (!self.initCallback){
             return;
         }
-        dispatch_sync(dispatch_get_main_queue(), ^{
+        dispatch_async(dispatch_get_main_queue(), ^{
             [self initCallback]();
         });
     });
@@ -89,6 +90,9 @@
         [self.privateContext performBlock:^{
             NSError *privateError;
             NSAssert([self.privateContext save:&privateError], @"Error saving private context, %@ \n%@", privateError.localizedDescription, privateError.userInfo);
+            if (!privateError) {
+                NSLog(@"Data SaveD!");
+            }
         }];
     }];
 }

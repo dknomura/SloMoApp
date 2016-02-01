@@ -24,8 +24,9 @@
     }];
 
     
-    VideoViewController *initialViewController = (VideoViewController*) self.window.rootViewController;
-    initialViewController.persistenceController = self.persistenceController;
+    UINavigationController *navController = (UINavigationController*)self.window.rootViewController;
+    VideoViewController *videoViewController = (VideoViewController*)navController.topViewController;
+    videoViewController.persistenceController = self.persistenceController;
     
     // Override point for customization after application launch.
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];

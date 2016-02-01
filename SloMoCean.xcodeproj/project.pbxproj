@@ -13,8 +13,21 @@
 		AA7ECA401C46FA1800C6F936 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA7ECA3E1C46FA1800C6F936 /* Main.storyboard */; };
 		AA7ECA421C46FA1800C6F936 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA7ECA411C46FA1800C6F936 /* Assets.xcassets */; };
 		AA7ECA451C46FA1800C6F936 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA7ECA431C46FA1800C6F936 /* LaunchScreen.storyboard */; };
+		AA80739F1C5C115200E527F6 /* VideoCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA80739E1C5C115200E527F6 /* VideoCollectionViewController.m */; };
+		AA8073A71C5C11E400E527F6 /* VideoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA8073A61C5C11E400E527F6 /* VideoCollectionViewCell.xib */; };
+		AA8073AD1C5C143800E527F6 /* VideoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8073AC1C5C143800E527F6 /* VideoCollectionViewCell.m */; };
+		AA8073CC1C5C72D000E527F6 /* UINavigationController+TransparentNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8073CB1C5C72D000E527F6 /* UINavigationController+TransparentNavigationController.m */; };
+		AA8073CF1C5C7FCB00E527F6 /* PlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8073CE1C5C7FCB00E527F6 /* PlayerView.m */; };
+		AA8073D61C5C84E100E527F6 /* back.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA8073D01C5C84E100E527F6 /* back.jpg */; };
+		AA8073D71C5C84E100E527F6 /* fastForward.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA8073D11C5C84E100E527F6 /* fastForward.jpg */; };
+		AA8073D81C5C84E100E527F6 /* foward.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA8073D21C5C84E100E527F6 /* foward.jpg */; };
+		AA8073D91C5C84E100E527F6 /* pause.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA8073D31C5C84E100E527F6 /* pause.jpg */; };
+		AA8073DA1C5C84E100E527F6 /* play.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA8073D41C5C84E100E527F6 /* play.jpg */; };
+		AA8073DB1C5C84E100E527F6 /* rewind.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AA8073D51C5C84E100E527F6 /* rewind.jpg */; };
+		AA8073DF1C5C8B5F00E527F6 /* VideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8073DE1C5C8B5F00E527F6 /* VideoPlayerViewController.m */; };
 		AAB225551C57D41000592E2E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB225541C57D41000592E2E /* AVFoundation.framework */; };
 		AAB225581C57D89500592E2E /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB225571C57D89500592E2E /* VideoViewController.m */; };
+		AAC3332B1C5EE05A00AE5025 /* delete.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AAC3332A1C5EE05A00AE5025 /* delete.jpeg */; };
 		AAC45BB71C5928FD007E9A42 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AAC45BB51C5928FD007E9A42 /* Model.xcdatamodeld */; };
 		AAC45BC61C592E20007E9A42 /* Video+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC45BC31C592E20007E9A42 /* Video+CoreDataProperties.m */; };
 		AAC45BC71C592E20007E9A42 /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC45BC51C592E20007E9A42 /* Video.m */; };
@@ -33,9 +46,27 @@
 		AA7ECA411C46FA1800C6F936 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA7ECA441C46FA1800C6F936 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA7ECA461C46FA1900C6F936 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA80739D1C5C115200E527F6 /* VideoCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCollectionViewController.h; sourceTree = "<group>"; };
+		AA80739E1C5C115200E527F6 /* VideoCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCollectionViewController.m; sourceTree = "<group>"; };
+		AA8073A61C5C11E400E527F6 /* VideoCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoCollectionViewCell.xib; sourceTree = "<group>"; };
+		AA8073AB1C5C143800E527F6 /* VideoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoCollectionViewCell.h; sourceTree = "<group>"; };
+		AA8073AC1C5C143800E527F6 /* VideoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoCollectionViewCell.m; sourceTree = "<group>"; };
+		AA8073CA1C5C72D000E527F6 /* UINavigationController+TransparentNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+TransparentNavigationController.h"; sourceTree = "<group>"; };
+		AA8073CB1C5C72D000E527F6 /* UINavigationController+TransparentNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+TransparentNavigationController.m"; sourceTree = "<group>"; };
+		AA8073CD1C5C7FCB00E527F6 /* PlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerView.h; sourceTree = "<group>"; };
+		AA8073CE1C5C7FCB00E527F6 /* PlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerView.m; sourceTree = "<group>"; };
+		AA8073D01C5C84E100E527F6 /* back.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = back.jpg; sourceTree = "<group>"; };
+		AA8073D11C5C84E100E527F6 /* fastForward.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = fastForward.jpg; sourceTree = "<group>"; };
+		AA8073D21C5C84E100E527F6 /* foward.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = foward.jpg; sourceTree = "<group>"; };
+		AA8073D31C5C84E100E527F6 /* pause.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pause.jpg; sourceTree = "<group>"; };
+		AA8073D41C5C84E100E527F6 /* play.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = play.jpg; sourceTree = "<group>"; };
+		AA8073D51C5C84E100E527F6 /* rewind.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = rewind.jpg; sourceTree = "<group>"; };
+		AA8073DD1C5C8B5F00E527F6 /* VideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewController.h; sourceTree = "<group>"; };
+		AA8073DE1C5C8B5F00E527F6 /* VideoPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoPlayerViewController.m; sourceTree = "<group>"; };
 		AAB225541C57D41000592E2E /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		AAB225561C57D89500592E2E /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
 		AAB225571C57D89500592E2E /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
+		AAC3332A1C5EE05A00AE5025 /* delete.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = delete.jpeg; sourceTree = "<group>"; };
 		AAC45BB61C5928FD007E9A42 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		AAC45BC21C592E20007E9A42 /* Video+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Video+CoreDataProperties.h"; sourceTree = "<group>"; };
 		AAC45BC31C592E20007E9A42 /* Video+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Video+CoreDataProperties.m"; sourceTree = "<group>"; };
@@ -65,6 +96,7 @@
 				AAB225541C57D41000592E2E /* AVFoundation.framework */,
 				AA7ECA341C46FA1800C6F936 /* SloMoCean */,
 				AA7ECA331C46FA1800C6F936 /* Products */,
+				AA8073DC1C5C84E800E527F6 /* images */,
 			);
 			sourceTree = "<group>";
 		};
@@ -82,14 +114,9 @@
 				AAC45BC11C592B02007E9A42 /* NSManagedObjects + model */,
 				AA7ECA381C46FA1800C6F936 /* AppDelegate.h */,
 				AA7ECA391C46FA1800C6F936 /* AppDelegate.m */,
-				AAB225561C57D89500592E2E /* VideoViewController.h */,
-				AAB225571C57D89500592E2E /* VideoViewController.m */,
-				AA600D331C5826850092A614 /* PreviewView.h */,
-				AA600D341C5826850092A614 /* PreviewView.m */,
-				AACC6D341C58B24600D81A35 /* VideoLibraryManager.h */,
-				AACC6D351C58B24600D81A35 /* VideoLibraryManager.m */,
-				AAC45BC81C596F88007E9A42 /* PersistenceController.h */,
-				AAC45BC91C596F88007E9A42 /* PersistenceController.m */,
+				AA8073A01C5C119A00E527F6 /* ViewControllers */,
+				AA8073A21C5C11B200E527F6 /* Views */,
+				AA8073A11C5C11A500E527F6 /* Model */,
 				AA7ECA3E1C46FA1800C6F936 /* Main.storyboard */,
 				AA7ECA411C46FA1800C6F936 /* Assets.xcassets */,
 				AA7ECA431C46FA1800C6F936 /* LaunchScreen.storyboard */,
@@ -105,6 +132,60 @@
 				AA7ECA361C46FA1800C6F936 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AA8073A01C5C119A00E527F6 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				AAB225561C57D89500592E2E /* VideoViewController.h */,
+				AAB225571C57D89500592E2E /* VideoViewController.m */,
+				AA80739D1C5C115200E527F6 /* VideoCollectionViewController.h */,
+				AA80739E1C5C115200E527F6 /* VideoCollectionViewController.m */,
+				AA8073DD1C5C8B5F00E527F6 /* VideoPlayerViewController.h */,
+				AA8073DE1C5C8B5F00E527F6 /* VideoPlayerViewController.m */,
+				AA8073CA1C5C72D000E527F6 /* UINavigationController+TransparentNavigationController.h */,
+				AA8073CB1C5C72D000E527F6 /* UINavigationController+TransparentNavigationController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		AA8073A11C5C11A500E527F6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				AACC6D341C58B24600D81A35 /* VideoLibraryManager.h */,
+				AACC6D351C58B24600D81A35 /* VideoLibraryManager.m */,
+				AAC45BC81C596F88007E9A42 /* PersistenceController.h */,
+				AAC45BC91C596F88007E9A42 /* PersistenceController.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		AA8073A21C5C11B200E527F6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				AA600D331C5826850092A614 /* PreviewView.h */,
+				AA600D341C5826850092A614 /* PreviewView.m */,
+				AA8073A61C5C11E400E527F6 /* VideoCollectionViewCell.xib */,
+				AA8073AB1C5C143800E527F6 /* VideoCollectionViewCell.h */,
+				AA8073AC1C5C143800E527F6 /* VideoCollectionViewCell.m */,
+				AA8073CD1C5C7FCB00E527F6 /* PlayerView.h */,
+				AA8073CE1C5C7FCB00E527F6 /* PlayerView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		AA8073DC1C5C84E800E527F6 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				AA8073D01C5C84E100E527F6 /* back.jpg */,
+				AAC3332A1C5EE05A00AE5025 /* delete.jpeg */,
+				AA8073D11C5C84E100E527F6 /* fastForward.jpg */,
+				AA8073D21C5C84E100E527F6 /* foward.jpg */,
+				AA8073D31C5C84E100E527F6 /* pause.jpg */,
+				AA8073D41C5C84E100E527F6 /* play.jpg */,
+				AA8073D51C5C84E100E527F6 /* rewind.jpg */,
+			);
+			name = images;
 			sourceTree = "<group>";
 		};
 		AAC45BC11C592B02007E9A42 /* NSManagedObjects + model */ = {
@@ -178,9 +259,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA8073D81C5C84E100E527F6 /* foward.jpg in Resources */,
 				AA7ECA451C46FA1800C6F936 /* LaunchScreen.storyboard in Resources */,
+				AA8073D61C5C84E100E527F6 /* back.jpg in Resources */,
+				AAC3332B1C5EE05A00AE5025 /* delete.jpeg in Resources */,
 				AA7ECA421C46FA1800C6F936 /* Assets.xcassets in Resources */,
+				AA8073DA1C5C84E100E527F6 /* play.jpg in Resources */,
+				AA8073A71C5C11E400E527F6 /* VideoCollectionViewCell.xib in Resources */,
 				AA7ECA401C46FA1800C6F936 /* Main.storyboard in Resources */,
+				AA8073D91C5C84E100E527F6 /* pause.jpg in Resources */,
+				AA8073DB1C5C84E100E527F6 /* rewind.jpg in Resources */,
+				AA8073D71C5C84E100E527F6 /* fastForward.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,8 +282,13 @@
 			files = (
 				AA7ECA3A1C46FA1800C6F936 /* AppDelegate.m in Sources */,
 				AAC45BCA1C596F88007E9A42 /* PersistenceController.m in Sources */,
+				AA8073CC1C5C72D000E527F6 /* UINavigationController+TransparentNavigationController.m in Sources */,
+				AA80739F1C5C115200E527F6 /* VideoCollectionViewController.m in Sources */,
+				AA8073CF1C5C7FCB00E527F6 /* PlayerView.m in Sources */,
 				AAC45BC71C592E20007E9A42 /* Video.m in Sources */,
 				AA600D351C5826850092A614 /* PreviewView.m in Sources */,
+				AA8073DF1C5C8B5F00E527F6 /* VideoPlayerViewController.m in Sources */,
+				AA8073AD1C5C143800E527F6 /* VideoCollectionViewCell.m in Sources */,
 				AAC45BC61C592E20007E9A42 /* Video+CoreDataProperties.m in Sources */,
 				AACC6D361C58B24600D81A35 /* VideoLibraryManager.m in Sources */,
 				AA7ECA371C46FA1800C6F936 /* main.m in Sources */,

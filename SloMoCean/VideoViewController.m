@@ -10,6 +10,9 @@
 
 #import "VideoViewController.h"
 #import "PreviewView.h"
+#import "VideoLibraryManager.h"
+#import "VideoCollectionViewController.h"
+#import "UINavigationController+TransparentNavigationController.h"
 
 static void * sessionRunningContext = &sessionRunningContext;
 
@@ -28,7 +31,7 @@ typedef NS_ENUM(NSInteger, SloMoCamSetupResult){
 @property (weak, nonatomic) IBOutlet UILabel *cameraUnavailableLabel;
 @property (weak, nonatomic) IBOutlet UIButton *libraryButton;
 @property (weak, nonatomic) IBOutlet UIButton *recordButton;
-@property (weak, nonatomic) IBOutlet UIButton *cameraButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cameraButton;
 
 //Session Management properties
 @property (nonatomic) dispatch_queue_t sessionQueue;
@@ -47,6 +50,7 @@ typedef NS_ENUM(NSInteger, SloMoCamSetupResult){
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     
     self.recordButton.enabled = NO;
     self.cameraButton.enabled = NO;
@@ -146,6 +150,8 @@ typedef NS_ENUM(NSInteger, SloMoCamSetupResult){
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    [self.navigationController hideTransparentNavigationBar];
     
     dispatch_async(self.sessionQueue, ^{
         switch (self.setupResult) {
@@ -294,7 +300,7 @@ typedef NS_ENUM(NSInteger, SloMoCamSetupResult){
 -(void) sessionWasInterrupted:(NSNotification*) notification
 {
     BOOL showResumeButton = NO;
-    if (AVCaptureSessionInterruptionReasonKey) {
+    if (&AVCaptureSessionInterruptionReasonKey) {
         AVCaptureSessionInterruptionReason reason = [notification.userInfo[AVCaptureSessionInterruptionReasonKey]integerValue];
         NSLog(@"Capture session was interrupted with the reason %ld", (long)reason);
         if (reason == AVCaptureSessionInterruptionReasonAudioDeviceInUseByAnotherClient || reason == AVCaptureSessionInterruptionReasonVideoDeviceInUseByAnotherClient) {
@@ -374,9 +380,14 @@ typedef NS_ENUM(NSInteger, SloMoCamSetupResult){
             AVCaptureVideoPreviewLayer *previewLayer = (AVCaptureVideoPreviewLayer*)self.previewView.layer;
             connection.videoOrientation = previewLayer.connection.videoOrientation;
             
-            NSString *outputFileName = [[NSProcessInfo processInfo]globallyUniqueString];
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc]init];
+            dateFormatter.dateFormat = @"MM-dd-yyyy HH:mm:ss";
+            NSString *outputFileName = [@"video" stringByAppendingString:[dateFormatter stringFromDate:[NSDate date]]];
             NSString *outputFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[outputFileName stringByAppendingPathExtension:@"mov"]];
-            [self.movieFileOutput startRecordingToOutputFileURL:[NSURL URLWithString:outputFilePath] recordingDelegate:self];
+            NSURL *outputFileURL = [NSURL fileURLWithPath:outputFilePath];
+            
+            
+            [self.movieFileOutput startRecordingToOutputFileURL:outputFileURL recordingDelegate:self];
             
         } else{
             [self.movieFileOutput stopRecording];
@@ -438,6 +449,8 @@ typedef NS_ENUM(NSInteger, SloMoCamSetupResult){
     });
 }
 
+
+
 - (IBAction)focusAndExposureWithTap:(UITapGestureRecognizer *)gestureRecognizer
 {
     CGPoint devicePoint = [(AVCaptureVideoPreviewLayer*)self.previewView.layer captureDevicePointOfInterestForPoint:[gestureRecognizer locationInView:gestureRecognizer.view]];
@@ -460,8 +473,10 @@ typedef NS_ENUM(NSInteger, SloMoCamSetupResult){
     UIBackgroundTaskIdentifier currentBackgroundRecordingID = self.backgroundRecordingID;
     self.backgroundRecordingID = UIBackgroundTaskInvalid;
     
-    
-    
+    VideoLibraryManager *videoLibraryManager = [[VideoLibraryManager alloc] init];
+    videoLibraryManager.persistenceController = self.persistenceController;
+    [videoLibraryManager moveNewVideoToVideoDirectory:outputFileURL];
+
     dispatch_async(dispatch_get_main_queue(), ^{
         self.cameraButton.enabled = ([AVCaptureDevice devicesWithMediaType:AVMediaTypeVideo].count > 1);
         self.recordButton.enabled = YES;
@@ -510,5 +525,17 @@ typedef NS_ENUM(NSInteger, SloMoCamSetupResult){
     }
     return captureDevice;
 }
+
+
+#pragma mark - NavBar Methods
+
+-(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"goToLibrary"]) {       VideoCollectionViewController *videoCollectionViewController = [segue destinationViewController];
+        videoCollectionViewController.persistenceController = self.persistenceController;
+    }
+}
+
+
 
 @end

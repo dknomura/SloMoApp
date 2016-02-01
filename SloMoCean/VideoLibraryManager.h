@@ -12,6 +12,10 @@
 
 
 @interface VideoLibraryManager : NSObject
--(void) moveNewVideoAtURL:(NSURL*)outputFileURL;
+@property (strong, nonatomic) PersistenceController *persistenceController;
+-(void) moveNewVideoToVideoDirectory:(NSURL*)outputFileURL;
+-(NSArray*) getVideoManagedObjects;
+-(void) deleteVideo:(Video*) video;
+
 
 @end
