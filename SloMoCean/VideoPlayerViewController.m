@@ -49,10 +49,14 @@ static int PlayerViewControllerKVOContext = 0;
     
     [self addObservers];
     
+    [self loadVideo];
+}
+
+-(void) loadVideo
+{
     self.playerView.playerLayer.player = self.player;
     
     NSURL *movieURL = [NSURL fileURLWithPath:self.currentVideo.filePath];
-
     
     self.asset = [AVURLAsset assetWithURL:movieURL];
     
@@ -60,6 +64,7 @@ static int PlayerViewControllerKVOContext = 0;
     _timeObserverToken = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
         weakSelf.timeSlider.value = CMTimeGetSeconds(time);
     }];
+
 }
 
 -(void) viewDidDisappear:(BOOL)animated
@@ -169,12 +174,31 @@ static int PlayerViewControllerKVOContext = 0;
 #pragma mark - actions
 - (IBAction)goToPreviousVideo:(id)sender
 {
+    NSUInteger currentIndex = [self.videoList indexOfObject:self.currentVideo];
+    if (currentIndex == 0) {
+        currentIndex = self.videoList.count - 1;
+    } else{
+        currentIndex--;
+    }
+    self.currentVideo = [self.videoList objectAtIndex:currentIndex];
+    
+    [self loadVideo];
     
 }
+
 - (IBAction)goToNextVideo:(id)sender
 {
+    NSUInteger currentIndex = [self.videoList indexOfObject:self.currentVideo];
+    if (currentIndex == self.videoList.count - 1) {
+        currentIndex = 0;
+    } else{
+        currentIndex++;
+    }
+    self.currentVideo = [self.videoList objectAtIndex:currentIndex];
     
+    [self loadVideo];
 }
+
 - (IBAction)playVideo:(id)sender
 {
     if (self.player.rate != 1.0) {
@@ -227,7 +251,7 @@ static int PlayerViewControllerKVOContext = 0;
         
     }else if ([keyPath isEqualToString: @"player.rate"]){
         double newRate = [change[NSKeyValueChangeNewKey] doubleValue];
-        UIImage *buttonImage = (newRate == 1.0) ? [UIImage imageNamed:@"play.jpg"] : [UIImage imageNamed:@"pause.jpg"];
+        UIImage *buttonImage = (newRate == 1.0) ? [UIImage imageNamed:@"pause.jpg"] : [UIImage imageNamed:@"play.jpg"];
         [self.playButton setImage:buttonImage forState:UIControlStateNormal];
         
     } else if ([keyPath isEqualToString:@"player.currentItem.status"]){

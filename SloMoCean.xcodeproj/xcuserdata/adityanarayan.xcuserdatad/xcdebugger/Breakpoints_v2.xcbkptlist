@@ -20,13 +20,77 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SloMoCean/VideoCollectionViewController.m"
-            timestampString = "475985091.021567"
+            timestampString = "476041943.464602"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "46"
+            endingLineNumber = "46"
             landmarkName = "-viewWillAppear:"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SloMoCean/VideoLibraryManager.m"
+            timestampString = "476041943.464602"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "-getVideoObjects"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SloMoCean/PersistenceController.m"
+            timestampString = "476043453.933178"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "67"
+            endingLineNumber = "67"
+            landmarkName = "-initializeCoreData"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__43-[PersistenceController initializeCoreData]_block_invoke"
+                  moduleName = "SloMoCean"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adityanarayan/Desktop/Daniel%20Nomura/TurnToTech-%20Xcode/Section%206%20slomo/SloMoCean/SloMoCean/PersistenceController.m"
+                  timestampString = "476046639.737601"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
+                  offsetFromSymbolStart = "816">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__43-[PersistenceController initializeCoreData]_block_invoke"
+                  moduleName = "SloMoCean"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/adityanarayan/Desktop/Daniel%20Nomura/TurnToTech-%20Xcode/Section%206%20slomo/SloMoCean/SloMoCean/PersistenceController.m"
+                  timestampString = "476046639.737878"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "67"
+                  endingLineNumber = "67"
+                  offsetFromSymbolStart = "956">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

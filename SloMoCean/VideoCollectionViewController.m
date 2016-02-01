@@ -11,6 +11,7 @@
 #import "VideoCollectionViewCell.h"
 #import "UINavigationController+TransparentNavigationController.h"
 #import "VideoPlayerViewController.h"
+#import "VideoInfo.h"
 
 @interface VideoCollectionViewController ()
 @property (strong, nonatomic) NSMutableArray *videoList;
@@ -64,9 +65,9 @@ static NSString * const reuseIdentifier = @"VideoCell";
 -(void) loadVideos
 {
     VideoLibraryManager *videoLibraryManager = [[VideoLibraryManager alloc]init];
-    videoLibraryManager.persistenceController = self.persistenceController;
-    self.videoList = [NSMutableArray arrayWithArray:[videoLibraryManager getVideoManagedObjects]];
-    
+//    videoLibraryManager.persistenceController = self.persistenceController;
+//    self.videoList = [NSMutableArray arrayWithArray:[videoLibraryManager getVideoManagedObjects]];
+    self.videoList = [videoLibraryManager getVideoObjects];
     //To add sections implement add fps to NSMutableSet below and get set.count
 //    for (Video *video in self.videoList){
 //        [self.videoFPSTypes addObject:video.fps];
@@ -89,16 +90,14 @@ static NSString * const reuseIdentifier = @"VideoCell";
 {
     VideoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
-    Video *currentVideo = [self.videoList objectAtIndex:indexPath.row];
+    VideoInfo *currentVideo = [self.videoList objectAtIndex:indexPath.row];
     
-    UIImage *currentVideoThumbnail = [currentVideo convertImageData:currentVideo.image];
+    cell.videoThumbnailImageView.image = currentVideo.thumbnailImage;
     
-    cell.videoThumbnailImageView.image = currentVideoThumbnail;
-    
-    NSString *videoName = currentVideo.filePath.lastPathComponent;
+    NSString *videoName = currentVideo.name;
     cell.videoInfo.text = videoName;
     
-    cell.videoTimeLabel.text = currentVideo.length;
+    cell.videoTimeLabel.text = currentVideo.duration;
     // Configure the cell
     
     if (self.editing) {
@@ -119,13 +118,14 @@ static NSString * const reuseIdentifier = @"VideoCell";
     if (self.editing) {
         [self removeCellAtIndexPath:indexPath];
     } else {
-        Video *currentVideo = [self.videoList objectAtIndex:indexPath.row];
+        VideoInfo *currentVideo = [self.videoList objectAtIndex:indexPath.row];
         
         VideoPlayerViewController *videoPlayerViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"VideoPlayer"];
         
 //        VideoPlayerViewController *videoPlayerViewController = [[VideoPlayerViewController alloc] init];
         
         videoPlayerViewController.currentVideo = currentVideo;
+        videoPlayerViewController.videoList = self.videoList;
         //    [self showViewController:videoPlayerViewController sender:nil];
         
         [self.navigationController pushViewController:videoPlayerViewController animated:YES];
@@ -138,8 +138,8 @@ static NSString * const reuseIdentifier = @"VideoCell";
 {
     [self.collectionView performBatchUpdates:^{
         VideoLibraryManager *videoLibraryManager = [[VideoLibraryManager alloc] init];
-        videoLibraryManager.persistenceController = self.persistenceController;
-        Video *currentVideo = self.videoList[indexPath.row];
+//        videoLibraryManager.persistenceController = self.persistenceController;
+        VideoInfo *currentVideo = self.videoList[indexPath.row];
         [videoLibraryManager deleteVideo:currentVideo];
         [self.videoList removeObject:currentVideo];
         [self.collectionView deleteItemsAtIndexPaths:@[indexPath]];

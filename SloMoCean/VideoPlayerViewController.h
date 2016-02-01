@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
-#import "Video.h"
+#import "VideoInfo.h"
 
 @interface VideoPlayerViewController : UIViewController
 @property (readonly) AVPlayer *player;
@@ -17,7 +17,8 @@
 @property CMTime currentTime;
 @property (readonly) CMTime duration;
 @property float rate;
-@property (strong, nonatomic) Video *currentVideo;
-@property (strong, nonatomic) NSArray *videoList;
+@property (strong, nonatomic) VideoInfo *currentVideo;
+@property (strong, nonatomic) NSMutableArray *videoList;
+//@property (strong, nonatomic) NSArray *videoList;
 
 @end

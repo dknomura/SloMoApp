@@ -28,9 +28,10 @@
 		AAB225551C57D41000592E2E /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAB225541C57D41000592E2E /* AVFoundation.framework */; };
 		AAB225581C57D89500592E2E /* VideoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAB225571C57D89500592E2E /* VideoViewController.m */; };
 		AAC3332B1C5EE05A00AE5025 /* delete.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AAC3332A1C5EE05A00AE5025 /* delete.jpeg */; };
+		AAC333421C5FC8CC00AE5025 /* Video+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC3333F1C5FC8CC00AE5025 /* Video+CoreDataProperties.m */; };
+		AAC333431C5FC8CC00AE5025 /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC333411C5FC8CC00AE5025 /* Video.m */; };
+		AAC333461C5FC8ED00AE5025 /* VideoInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC333451C5FC8ED00AE5025 /* VideoInfo.m */; };
 		AAC45BB71C5928FD007E9A42 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AAC45BB51C5928FD007E9A42 /* Model.xcdatamodeld */; };
-		AAC45BC61C592E20007E9A42 /* Video+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC45BC31C592E20007E9A42 /* Video+CoreDataProperties.m */; };
-		AAC45BC71C592E20007E9A42 /* Video.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC45BC51C592E20007E9A42 /* Video.m */; };
 		AAC45BCA1C596F88007E9A42 /* PersistenceController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAC45BC91C596F88007E9A42 /* PersistenceController.m */; };
 		AACC6D361C58B24600D81A35 /* VideoLibraryManager.m in Sources */ = {isa = PBXBuildFile; fileRef = AACC6D351C58B24600D81A35 /* VideoLibraryManager.m */; };
 /* End PBXBuildFile section */
@@ -67,11 +68,13 @@
 		AAB225561C57D89500592E2E /* VideoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoViewController.h; sourceTree = "<group>"; };
 		AAB225571C57D89500592E2E /* VideoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoViewController.m; sourceTree = "<group>"; };
 		AAC3332A1C5EE05A00AE5025 /* delete.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = delete.jpeg; sourceTree = "<group>"; };
+		AAC3333E1C5FC8CC00AE5025 /* Video+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Video+CoreDataProperties.h"; sourceTree = "<group>"; };
+		AAC3333F1C5FC8CC00AE5025 /* Video+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Video+CoreDataProperties.m"; sourceTree = "<group>"; };
+		AAC333401C5FC8CC00AE5025 /* Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Video.h; sourceTree = "<group>"; };
+		AAC333411C5FC8CC00AE5025 /* Video.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Video.m; sourceTree = "<group>"; };
+		AAC333441C5FC8ED00AE5025 /* VideoInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoInfo.h; sourceTree = "<group>"; };
+		AAC333451C5FC8ED00AE5025 /* VideoInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VideoInfo.m; sourceTree = "<group>"; };
 		AAC45BB61C5928FD007E9A42 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
-		AAC45BC21C592E20007E9A42 /* Video+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Video+CoreDataProperties.h"; sourceTree = "<group>"; };
-		AAC45BC31C592E20007E9A42 /* Video+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Video+CoreDataProperties.m"; sourceTree = "<group>"; };
-		AAC45BC41C592E20007E9A42 /* Video.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Video.h; sourceTree = "<group>"; };
-		AAC45BC51C592E20007E9A42 /* Video.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Video.m; sourceTree = "<group>"; };
 		AAC45BC81C596F88007E9A42 /* PersistenceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersistenceController.h; sourceTree = "<group>"; };
 		AAC45BC91C596F88007E9A42 /* PersistenceController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersistenceController.m; sourceTree = "<group>"; };
 		AACC6D341C58B24600D81A35 /* VideoLibraryManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoLibraryManager.h; sourceTree = "<group>"; };
@@ -114,6 +117,8 @@
 				AAC45BC11C592B02007E9A42 /* NSManagedObjects + model */,
 				AA7ECA381C46FA1800C6F936 /* AppDelegate.h */,
 				AA7ECA391C46FA1800C6F936 /* AppDelegate.m */,
+				AAC333441C5FC8ED00AE5025 /* VideoInfo.h */,
+				AAC333451C5FC8ED00AE5025 /* VideoInfo.m */,
 				AA8073A01C5C119A00E527F6 /* ViewControllers */,
 				AA8073A21C5C11B200E527F6 /* Views */,
 				AA8073A11C5C11A500E527F6 /* Model */,
@@ -191,10 +196,10 @@
 		AAC45BC11C592B02007E9A42 /* NSManagedObjects + model */ = {
 			isa = PBXGroup;
 			children = (
-				AAC45BC21C592E20007E9A42 /* Video+CoreDataProperties.h */,
-				AAC45BC31C592E20007E9A42 /* Video+CoreDataProperties.m */,
-				AAC45BC41C592E20007E9A42 /* Video.h */,
-				AAC45BC51C592E20007E9A42 /* Video.m */,
+				AAC3333E1C5FC8CC00AE5025 /* Video+CoreDataProperties.h */,
+				AAC3333F1C5FC8CC00AE5025 /* Video+CoreDataProperties.m */,
+				AAC333401C5FC8CC00AE5025 /* Video.h */,
+				AAC333411C5FC8CC00AE5025 /* Video.m */,
 				AAC45BB51C5928FD007E9A42 /* Model.xcdatamodeld */,
 			);
 			name = "NSManagedObjects + model";
@@ -281,19 +286,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA7ECA3A1C46FA1800C6F936 /* AppDelegate.m in Sources */,
+				AAC333461C5FC8ED00AE5025 /* VideoInfo.m in Sources */,
 				AAC45BCA1C596F88007E9A42 /* PersistenceController.m in Sources */,
 				AA8073CC1C5C72D000E527F6 /* UINavigationController+TransparentNavigationController.m in Sources */,
 				AA80739F1C5C115200E527F6 /* VideoCollectionViewController.m in Sources */,
 				AA8073CF1C5C7FCB00E527F6 /* PlayerView.m in Sources */,
-				AAC45BC71C592E20007E9A42 /* Video.m in Sources */,
 				AA600D351C5826850092A614 /* PreviewView.m in Sources */,
 				AA8073DF1C5C8B5F00E527F6 /* VideoPlayerViewController.m in Sources */,
 				AA8073AD1C5C143800E527F6 /* VideoCollectionViewCell.m in Sources */,
-				AAC45BC61C592E20007E9A42 /* Video+CoreDataProperties.m in Sources */,
 				AACC6D361C58B24600D81A35 /* VideoLibraryManager.m in Sources */,
+				AAC333421C5FC8CC00AE5025 /* Video+CoreDataProperties.m in Sources */,
 				AA7ECA371C46FA1800C6F936 /* main.m in Sources */,
 				AAB225581C57D89500592E2E /* VideoViewController.m in Sources */,
 				AAC45BB71C5928FD007E9A42 /* Model.xcdatamodeld in Sources */,
+				AAC333431C5FC8CC00AE5025 /* Video.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

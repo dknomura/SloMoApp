@@ -19,9 +19,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    self.persistenceController = [[PersistenceController alloc]initWithCallback:^{
-        [self completeUserInterface];
-    }];
+//    self.persistenceController = [[PersistenceController alloc]initWithCallback:^{
+//        [self completeUserInterface];
+//    }];
 
     
     UINavigationController *navController = (UINavigationController*)self.window.rootViewController;

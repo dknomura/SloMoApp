@@ -9,13 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "Video.h"
 #import "PersistenceController.h"
+#import "VideoInfo.h"
 
 
 @interface VideoLibraryManager : NSObject
 @property (strong, nonatomic) PersistenceController *persistenceController;
 -(void) moveNewVideoToVideoDirectory:(NSURL*)outputFileURL;
 -(NSArray*) getVideoManagedObjects;
--(void) deleteVideo:(Video*) video;
+-(NSMutableArray*) getVideoObjects;
+//-(void) deleteVideo:(Video*) video;
+-(void) deleteVideo:(VideoInfo *)video;
 
 
 @end
