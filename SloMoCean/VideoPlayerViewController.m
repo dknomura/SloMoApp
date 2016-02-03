@@ -201,7 +201,8 @@ static int PlayerViewControllerKVOContext = 0;
 
 - (IBAction)playVideo:(id)sender
 {
-    if (self.player.rate != 1.0) {
+//    if (self.player.rate != 1.0) {
+    if (self.player.rate == 0) {
         if (CMTIME_COMPARE_INLINE(self.currentTime, ==, self.duration)) {
             self.currentTime = kCMTimeZero;
         }
@@ -251,7 +252,7 @@ static int PlayerViewControllerKVOContext = 0;
         
     }else if ([keyPath isEqualToString: @"player.rate"]){
         double newRate = [change[NSKeyValueChangeNewKey] doubleValue];
-        UIImage *buttonImage = (newRate == 1.0) ? [UIImage imageNamed:@"pause.jpg"] : [UIImage imageNamed:@"play.jpg"];
+        UIImage *buttonImage = (newRate != 0) ? [UIImage `imageNamed:@"pause.jpg"] : [UIImage imageNamed:@"play.jpg"];
         [self.playButton setImage:buttonImage forState:UIControlStateNormal];
         
     } else if ([keyPath isEqualToString:@"player.currentItem.status"]){

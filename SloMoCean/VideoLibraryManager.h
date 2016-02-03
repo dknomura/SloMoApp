@@ -15,6 +15,7 @@
 @interface VideoLibraryManager : NSObject
 @property (strong, nonatomic) PersistenceController *persistenceController;
 -(void) moveNewVideoToVideoDirectory:(NSURL*)outputFileURL;
+-(NSMutableSet*) getFPSSetFromVideoList:(NSMutableArray*) videoList;
 -(NSArray*) getVideoManagedObjects;
 -(NSMutableArray*) getVideoObjects;
 //-(void) deleteVideo:(Video*) video;

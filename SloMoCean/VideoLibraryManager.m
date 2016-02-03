@@ -129,6 +129,7 @@
     if (error) {
         NSLog(@"Error getting videos in VideoDirectory: %@\n%@", error.localizedDescription, error.userInfo);
     } else {
+        int d = 0;
         for (NSString *fileName in videoPathList) {
             if (![fileName.pathExtension isEqualToString:@"mov"]) {
                 continue;
@@ -151,6 +152,8 @@
             AVAssetTrack *videoTrack = [[videoAsset tracksWithMediaType:AVMediaTypeVideo] lastObject];
             if (videoTrack) {
                 newVideo.fps = [NSString stringWithFormat:@"%f", videoTrack.nominalFrameRate];
+                NSLog(@"video%d fps: %@", d, newVideo.fps);
+                d++;
             }
             
             AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:videoAsset];
@@ -165,6 +168,18 @@
         }
     }
     return videoList;
+}
+
+-(NSMutableSet*) getFPSSetFromVideoList:(NSMutableArray*) videoList
+{
+    NSMutableArray *fpsOfVideos = [NSMutableArray new];
+    
+    for (Video *video in videoList){
+        [fpsOfVideos addObject:video.fps];
+    }
+    NSMutableSet *fpsList = [NSMutableSet setWithArray:fpsOfVideos];
+    
+    return fpsList;
 }
 
 

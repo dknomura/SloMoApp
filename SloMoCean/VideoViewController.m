@@ -422,6 +422,38 @@ typedef NS_ENUM(NSInteger, SloMoCamSetupResult){
             [self.session stopRunning];
         }
         
+        AVCaptureDevice *videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+        [videoDevice lockForConfiguration:nil];
+        AVCaptureDeviceFormat *selectedFormat = nil;
+        int32_t maxWidth = 0;
+        AVFrameRateRange *frameRateRange = 0;
+        
+        for (AVCaptureDeviceFormat *format in [videoDevice formats]){
+            for (AVFrameRateRange *range in format.videoSupportedFrameRateRanges){
+                CMFormatDescriptionRef description = format.formatDescription;
+                CMVideoDimensions dimensions = CMVideoFormatDescriptionGetDimensions(description);
+                int32_t width = dimensions.width;
+                
+                if (range.minFrameRate <= frameRate && frameRate <= range.maxFrameRate && width >= maxWidth) {
+                    selectedFormat = format;
+                    frameRateRange = range;
+                    maxWidth = width;
+                }
+                if (selectedFormat){
+                    if ([videoDevice lockForConfiguration:nil]) {
+                        NSLog(@"Selected format: %@", selectedFormat);
+                        videoDevice.activeFormat = selectedFormat;
+                        videoDevice.activeVideoMinFrameDuration = CMTimeMake(1, (int32_t) frameRate);
+                        videoDevice.activeVideoMaxFrameDuration = CMTimeMake(1, (int32_t) frameRate);
+                        [videoDevice unlockForConfiguration];
+                    }
+                }
+                if (isRunning){
+                    [self.session startRunning];
+                }
+            }
+        }
+        
         /*- (void)resetFormat {
          
          BOOL isRunning = self.captureSession.isRunning;
@@ -441,7 +473,7 @@ typedef NS_ENUM(NSInteger, SloMoCamSetupResult){
          }
          }
          
-         - (void)switchFormatWithDesiredFPS:(CGFloat)desiredFPS
+         //- (void)switchFormatWithDesiredFPS:(CGFloat)desiredFPS
          {
          BOOL isRunning = self.captureSession.isRunning;
          

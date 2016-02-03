@@ -27,7 +27,7 @@ static NSString * const reuseIdentifier = @"VideoCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self loadVideos];
+    [self loadVideoLists];
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -62,12 +62,13 @@ static NSString * const reuseIdentifier = @"VideoCell";
 }
 */
 
--(void) loadVideos
+-(void) loadVideoLists
 {
     VideoLibraryManager *videoLibraryManager = [[VideoLibraryManager alloc]init];
 //    videoLibraryManager.persistenceController = self.persistenceController;
 //    self.videoList = [NSMutableArray arrayWithArray:[videoLibraryManager getVideoManagedObjects]];
     self.videoList = [videoLibraryManager getVideoObjects];
+    self.videoFPSTypes = [videoLibraryManager getFPSSetFromVideoList:self.videoList];
     //To add sections implement add fps to NSMutableSet below and get set.count
 //    for (Video *video in self.videoList){
 //        [self.videoFPSTypes addObject:video.fps];
