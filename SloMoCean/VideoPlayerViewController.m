@@ -25,6 +25,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *currentTimeLabel;
 @property (weak, nonatomic) IBOutlet UISlider *timeSlider;
 @property (weak, nonatomic) IBOutlet UILabel *durationLabel;
+@property (weak, nonatomic) IBOutlet UILabel *fpsLowerLimit;
+@property (weak, nonatomic) IBOutlet UILabel *fpsUpperLimit;
+@property (weak, nonatomic) IBOutlet UISlider *fpsSlider;
 
 //Other properties
 @property AVPlayerItem *playerItem;
@@ -60,11 +63,22 @@ static int PlayerViewControllerKVOContext = 0;
     
     self.asset = [AVURLAsset assetWithURL:movieURL];
     
+    float playbackSpeed = 30.0 /[self.currentVideo.fps floatValue];
+    if (playbackSpeed < .9) {
+        self.fpsLowerLimit.text = @"0.50";
+        self.fpsSlider.minimumValue = .5;
+    } else{
+        self.fpsLowerLimit.text = @"1.00";
+        self.fpsSlider.minimumValue = 1;
+    }
+    
+    [self.fpsSlider setValue:1.0 animated:YES];
+    
     VideoPlayerViewController __weak *weakSelf = self;
     _timeObserverToken = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1, 1) queue:dispatch_get_main_queue() usingBlock:^(CMTime time) {
         weakSelf.timeSlider.value = CMTimeGetSeconds(time);
     }];
-
+    
 }
 
 -(void) viewDidDisappear:(BOOL)animated
@@ -206,6 +220,7 @@ static int PlayerViewControllerKVOContext = 0;
         if (CMTIME_COMPARE_INLINE(self.currentTime, ==, self.duration)) {
             self.currentTime = kCMTimeZero;
         }
+        self.player.rate = self.fpsSlider.value;
         [self.player play];
     } else {
         [self.player pause];
@@ -222,6 +237,14 @@ static int PlayerViewControllerKVOContext = 0;
     self.currentTime = CMTimeMakeWithSeconds(sender.value, 1000);
 }
 
+
+- (IBAction)fpsSliderChange:(UISlider *)sender
+{
+//    CMTime currentTime = self.currentTime;
+    self.player.rate = sender.value;
+//    self.currentTime = currentTime;
+//    [self.player pause];
+}
 
 #pragma mark - KVO observe methods
 -(void) observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context
@@ -252,7 +275,7 @@ static int PlayerViewControllerKVOContext = 0;
         
     }else if ([keyPath isEqualToString: @"player.rate"]){
         double newRate = [change[NSKeyValueChangeNewKey] doubleValue];
-        UIImage *buttonImage = (newRate != 0) ? [UIImage `imageNamed:@"pause.jpg"] : [UIImage imageNamed:@"play.jpg"];
+        UIImage *buttonImage = (newRate != 0) ? [UIImage imageNamed:@"pause.jpg"] : [UIImage imageNamed:@"play.jpg"];
         [self.playButton setImage:buttonImage forState:UIControlStateNormal];
         
     } else if ([keyPath isEqualToString:@"player.currentItem.status"]){

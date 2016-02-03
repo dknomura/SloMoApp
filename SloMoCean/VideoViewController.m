@@ -38,6 +38,9 @@ typedef NS_ENUM(NSInteger, SloMoCamSetupResult){
 @property (nonatomic) AVCaptureSession *session;
 @property (nonatomic) AVCaptureDeviceInput *videoDeviceInput;
 @property (nonatomic) AVCaptureMovieFileOutput *movieFileOutput;
+@property (nonatomic, strong) AVCaptureDeviceFormat *defaultFormat;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UILabel *cameraStatus;
 
 //Utilities
 @property (nonatomic) SloMoCamSetupResult setupResult;
@@ -51,6 +54,11 @@ typedef NS_ENUM(NSInteger, SloMoCamSetupResult){
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    AVCaptureDevice *videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    self.defaultFormat = videoDevice.activeFormat;
+    [self resetFormat];
+    
+    self.activityIndicator.hidden = YES;
     
     self.recordButton.enabled = NO;
     self.cameraButton.enabled = NO;
@@ -151,6 +159,11 @@ typedef NS_ENUM(NSInteger, SloMoCamSetupResult){
 -(void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self.activityIndicator stopAnimating];
+    self.activityIndicator.hidden = YES;
+    self.cameraStatus.hidden = YES;
+    self.libraryButton.enabled =YES;
 
     [self.navigationController hideTransparentNavigationBar];
     
@@ -367,6 +380,10 @@ typedef NS_ENUM(NSInteger, SloMoCamSetupResult){
         }
     });
 }
+- (IBAction)goToLibrary:(id)sender
+{
+    [self shouldActivateButtons:NO withStatusText:@"Loading Library"];
+}
 
 - (IBAction)toggleMovieRecord:(id)sender
 {
@@ -397,129 +414,6 @@ typedef NS_ENUM(NSInteger, SloMoCamSetupResult){
         }
     });
 }
-
-
-- (IBAction)fpsSegmentControl:(id)sender
-{
-    CGFloat frameRate = 0;
-    switch (self.fpsSegControl.selectedSegmentIndex) {
-        case 0:
-            frameRate = 30.0;
-            break;
-        case 1:
-            frameRate = 60.0;
-            break;
-        case 2:
-            frameRate = 120.0;
-            break;
-        default:
-            frameRate = 30.0;
-    }
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        BOOL isRunning = self.session.isRunning;
-        if (isRunning) {
-            [self.session stopRunning];
-        }
-        
-        AVCaptureDevice *videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-        [videoDevice lockForConfiguration:nil];
-        AVCaptureDeviceFormat *selectedFormat = nil;
-        int32_t maxWidth = 0;
-        AVFrameRateRange *frameRateRange = 0;
-        
-        for (AVCaptureDeviceFormat *format in [videoDevice formats]){
-            for (AVFrameRateRange *range in format.videoSupportedFrameRateRanges){
-                CMFormatDescriptionRef description = format.formatDescription;
-                CMVideoDimensions dimensions = CMVideoFormatDescriptionGetDimensions(description);
-                int32_t width = dimensions.width;
-                
-                if (range.minFrameRate <= frameRate && frameRate <= range.maxFrameRate && width >= maxWidth) {
-                    selectedFormat = format;
-                    frameRateRange = range;
-                    maxWidth = width;
-                }
-                if (selectedFormat){
-                    if ([videoDevice lockForConfiguration:nil]) {
-                        NSLog(@"Selected format: %@", selectedFormat);
-                        videoDevice.activeFormat = selectedFormat;
-                        videoDevice.activeVideoMinFrameDuration = CMTimeMake(1, (int32_t) frameRate);
-                        videoDevice.activeVideoMaxFrameDuration = CMTimeMake(1, (int32_t) frameRate);
-                        [videoDevice unlockForConfiguration];
-                    }
-                }
-                if (isRunning){
-                    [self.session startRunning];
-                }
-            }
-        }
-        
-        /*- (void)resetFormat {
-         
-         BOOL isRunning = self.captureSession.isRunning;
-         
-         if (isRunning) {
-         [self.captureSession stopRunning];
-         }
-         
-         AVCaptureDevice *videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-         [videoDevice lockForConfiguration:nil];
-         videoDevice.activeFormat = self.defaultFormat;
-         videoDevice.activeVideoMaxFrameDuration = defaultVideoMaxFrameDuration;
-         [videoDevice unlockForConfiguration];
-         
-         if (isRunning) {
-         [self.captureSession startRunning];
-         }
-         }
-         
-         //- (void)switchFormatWithDesiredFPS:(CGFloat)desiredFPS
-         {
-         BOOL isRunning = self.captureSession.isRunning;
-         
-         if (isRunning)  [self.captureSession stopRunning];
-         
-         AVCaptureDevice *videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-         AVCaptureDeviceFormat *selectedFormat = nil;
-         int32_t maxWidth = 0;
-         AVFrameRateRange *frameRateRange = nil;
-         
-         for (AVCaptureDeviceFormat *format in [videoDevice formats]) {
-         
-         for (AVFrameRateRange *range in format.videoSupportedFrameRateRanges) {
-         
-         CMFormatDescriptionRef desc = format.formatDescription;
-         CMVideoDimensions dimensions = CMVideoFormatDescriptionGetDimensions(desc);
-         int32_t width = dimensions.width;
-         
-         if (range.minFrameRate <= desiredFPS && desiredFPS <= range.maxFrameRate && width >= maxWidth) {
-         
-         selectedFormat = format;
-         frameRateRange = range;
-         maxWidth = width;
-         }
-         }
-         }
-         
-         if (selectedFormat) {
-         
-         if ([videoDevice lockForConfiguration:nil]) {
-         
-         NSLog(@"selected format:%@", selectedFormat);
-         videoDevice.activeFormat = selectedFormat;
-         videoDevice.activeVideoMinFrameDuration = CMTimeMake(1, (int32_t)desiredFPS);
-         videoDevice.activeVideoMaxFrameDuration = CMTimeMake(1, (int32_t)desiredFPS);
-         [videoDevice unlockForConfiguration];
-         }
-         }
-         
-         if (isRunning) [self.captureSession startRunning];
-         }
-         */
-    });
-}
-
-
 
 - (IBAction)changeCamera:(id)sender
 {
@@ -570,12 +464,121 @@ typedef NS_ENUM(NSInteger, SloMoCamSetupResult){
 }
 
 
-
 - (IBAction)focusAndExposureWithTap:(UITapGestureRecognizer *)gestureRecognizer
 {
     CGPoint devicePoint = [(AVCaptureVideoPreviewLayer*)self.previewView.layer captureDevicePointOfInterestForPoint:[gestureRecognizer locationInView:gestureRecognizer.view]];
     [self focusWithMode:AVCaptureFocusModeAutoFocus exposeWithMode:AVCaptureExposureModeAutoExpose atDevicePoint:devicePoint monitorSubjectAreaChange:YES];
 }
+
+- (IBAction)fpsSegmentControl:(id)sender
+{
+    CGFloat frameRate = 0;
+    switch (self.fpsSegControl.selectedSegmentIndex) {
+        case 0:
+            frameRate = 30.0;
+            [self resetFormat];
+            return;
+            break;
+        case 1:
+            frameRate = 60.0;
+            break;
+        case 2:
+            frameRate = 120.0;
+            break;
+        default:
+            frameRate = 30.0;
+    }
+    
+    [self shouldActivateButtons:NO withStatusText:@"Switching..."];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if (frameRate == 30.0) {
+            [self resetFormat];
+        } else{
+            [self setFormatWithFPS:frameRate];
+        }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self shouldActivateButtons:YES withStatusText:nil];
+        });
+    });
+}
+
+#pragma mark - Activate/inactivate buttons
+-(void) shouldActivateButtons:(BOOL)activate withStatusText:(NSString*) status
+{
+    self.cameraStatus.hidden = activate;
+    self.cameraStatus.text = @"Switching...";
+    self.activityIndicator.hidden = activate;
+    if (activate) {
+        [self.activityIndicator stopAnimating];
+    } else {
+        [self.activityIndicator startAnimating];
+    }
+    self.libraryButton.enabled = activate;
+    self.recordButton.enabled = activate;
+    self.cameraButton.enabled = activate;
+}
+
+#pragma mark - Set Camera Format
+-(void) resetFormat
+{
+    BOOL isRunning = self.session.isRunning;
+    if ( isRunning ) {
+        [self.session stopRunning];
+    }
+    AVCaptureDevice *videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    [videoDevice lockForConfiguration:nil];
+    videoDevice.activeFormat = self.defaultFormat;
+    NSArray *supportedFrameRateRanges = videoDevice.activeFormat.videoSupportedFrameRateRanges;
+    NSLog(@"%@", supportedFrameRateRanges);
+    videoDevice.activeVideoMaxFrameDuration = CMTimeMake(1, 30);
+    [videoDevice unlockForConfiguration];
+    
+    if (isRunning) {
+        [self.session startRunning];
+    }
+}
+
+-(void) setFormatWithFPS:(CGFloat) frameRate
+{
+    BOOL isRunning = self.session.isRunning;
+    if (isRunning) {
+        [self.session stopRunning];
+    }
+    
+    AVCaptureDevice *videoDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
+    [videoDevice lockForConfiguration:nil];
+    AVCaptureDeviceFormat *selectedFormat = nil;
+    int32_t maxWidth = 0;
+    AVFrameRateRange *frameRateRange = 0;
+    
+    for (AVCaptureDeviceFormat *format in [videoDevice formats]){
+        for (AVFrameRateRange *range in format.videoSupportedFrameRateRanges){
+            CMFormatDescriptionRef description = format.formatDescription;
+            CMVideoDimensions dimensions = CMVideoFormatDescriptionGetDimensions(description);
+            int32_t width = dimensions.width;
+            
+            if (range.minFrameRate <= frameRate && frameRate <= range.maxFrameRate && width >= maxWidth) {
+                selectedFormat = format;
+                frameRateRange = range;
+                maxWidth = width;
+            }
+            if (selectedFormat){
+                if ([videoDevice lockForConfiguration:nil]) {
+                    NSLog(@"Selected format: %@", selectedFormat);
+                    videoDevice.activeFormat = selectedFormat;
+                    videoDevice.activeVideoMinFrameDuration = CMTimeMake(1, (int32_t) frameRate);
+                    videoDevice.activeVideoMaxFrameDuration = CMTimeMake(1, (int32_t) frameRate);
+                    [videoDevice unlockForConfiguration];
+                }
+            }
+        }
+    }
+    if (isRunning){
+        [self.session startRunning];
+    }
+}
+
 
 
 #pragma mark - File output recording delegate
@@ -652,7 +655,8 @@ typedef NS_ENUM(NSInteger, SloMoCamSetupResult){
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"goToLibrary"]) {       VideoCollectionViewController *videoCollectionViewController = [segue destinationViewController];
+    if ([segue.identifier isEqualToString:@"goToLibrary"]) {
+        VideoCollectionViewController *videoCollectionViewController = [segue destinationViewController];
         videoCollectionViewController.persistenceController = self.persistenceController;
     }
 }
