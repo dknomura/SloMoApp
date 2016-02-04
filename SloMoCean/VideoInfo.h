@@ -11,7 +11,7 @@
 
 @interface VideoInfo : NSObject
 @property (strong, nonatomic) NSString *filePath;
-@property (strong, nonatomic) NSString *fps;
+@property (nonatomic) int fps;
 @property (strong, nonatomic) NSString *name;
 //@property (strong, nonatomic) NSData *imageData;
 @property (strong, nonatomic) UIImage *thumbnailImage;

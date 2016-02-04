@@ -63,7 +63,7 @@ static int PlayerViewControllerKVOContext = 0;
     
     self.asset = [AVURLAsset assetWithURL:movieURL];
     
-    float playbackSpeed = 30.0 /[self.currentVideo.fps floatValue];
+    float playbackSpeed = 30.0 /(float)self.currentVideo.fps;
     if (playbackSpeed < .9) {
         self.fpsLowerLimit.text = @"0.50";
         self.fpsSlider.minimumValue = .5;

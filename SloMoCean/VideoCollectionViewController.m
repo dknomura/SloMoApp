@@ -15,7 +15,7 @@
 
 @interface VideoCollectionViewController ()
 @property (strong, nonatomic) NSMutableArray *videoList;
-@property (strong, nonatomic) NSMutableSet *videoFPSTypes;
+@property (strong, nonatomic) NSArray *videoFPSTypes;
 @property (strong, nonatomic) VideoCollectionViewCell *videoCollectionViewCell;
 //@property (strong, nonatomic) Video *currentVideo;
 @end
@@ -78,14 +78,22 @@ static NSString * const reuseIdentifier = @"VideoCell";
 #pragma mark <UICollectionViewDataSource>
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 1;
+    return self.videoFPSTypes.count;
 }
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return self.videoList.count;
+    NSMutableArray *arrayOfVideosInSection = [NSMutableArray new];
+    for (VideoInfo *video in self.videoList){
+        if (video.fps == [self.videoFPSTypes[section] integerValue]) {
+            [arrayOfVideosInSection addObject:[NSObject new]];
+        }
+    }
+    return arrayOfVideosInSection.count;
 }
+
+
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {

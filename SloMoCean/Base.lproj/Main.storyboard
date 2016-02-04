@@ -157,13 +157,13 @@
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="qBd-I4-pBD">
                             <size key="itemSize" width="125" height="125"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="headerReferenceSize" width="50" height="50"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="VideoCell" id="zj4-aN-0gc" customClass="VideoCollectionViewCell">
-                                <rect key="frame" x="0.0" y="64" width="125" height="125"/>
+                                <rect key="frame" x="0.0" y="114" width="125" height="125"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="125" height="125"/>
@@ -172,6 +172,11 @@
                                 </view>
                             </collectionViewCell>
                         </cells>
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Header" id="G9x-9a-idl">
+                            <rect key="frame" x="0.0" y="64" width="600" height="50"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <rect key="contentStretch" x="0.0" y="0.0" width="1" height="0.65000000000000002"/>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="etl-Vv-Tdp" id="qYy-cU-rdD"/>
                             <outlet property="delegate" destination="etl-Vv-Tdp" id="Pze-pN-2aV"/>
@@ -266,8 +271,8 @@
                                     <action selector="goToNextVideo:" destination="Y1S-5W-1Cw" eventType="touchUpInside" id="7hI-OR-5IN"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="LUs-Vx-soS">
-                                <rect key="frame" x="34" y="513" width="110" height="31"/>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="1" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="LUs-Vx-soS">
+                                <rect key="frame" x="40" y="513" width="98" height="31"/>
                                 <connections>
                                     <action selector="fpsSliderChange:" destination="Y1S-5W-1Cw" eventType="valueChanged" id="jZ3-2M-cp6"/>
                                 </connections>
@@ -278,8 +283,8 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbJ-80-za3">
-                                <rect key="frame" x="12" y="526" width="24" height="11"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="min" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbJ-80-za3">
+                                <rect key="frame" x="12" y="526" width="30" height="11"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="9"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>

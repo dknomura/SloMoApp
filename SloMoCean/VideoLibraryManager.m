@@ -14,7 +14,7 @@
 
 
 @interface VideoLibraryManager()
-@property (strong, nonatomic) Video *video;
+//@property (strong, nonatomic) Video *video;
 
 @end
 
@@ -129,7 +129,6 @@
     if (error) {
         NSLog(@"Error getting videos in VideoDirectory: %@\n%@", error.localizedDescription, error.userInfo);
     } else {
-        int d = 0;
         for (NSString *fileName in videoPathList) {
             if (![fileName.pathExtension isEqualToString:@"mov"]) {
                 continue;
@@ -151,9 +150,18 @@
             
             AVAssetTrack *videoTrack = [[videoAsset tracksWithMediaType:AVMediaTypeVideo] lastObject];
             if (videoTrack) {
-                newVideo.fps = [NSString stringWithFormat:@"%f", videoTrack.nominalFrameRate];
-                NSLog(@"video%d fps: %@", d, newVideo.fps);
-                d++;
+                float fps = videoTrack.nominalFrameRate;
+                int intFPS = 0;
+                if (fps > 110) {
+                    intFPS = 120;
+                } else if (fps > 50){
+                    intFPS = 60;
+                } else{
+                    intFPS = 30;
+                }
+                newVideo.fps = intFPS;
+//                NSLog(@"video%d fps: %@", d, newVideo.fps);
+//                d++;
             }
             
             AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:videoAsset];
@@ -167,32 +175,35 @@
             [videoList addObject: newVideo];
         }
     }
-    return videoList;
+    NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"fps" ascending:YES];
+    NSMutableArray *orderedVideoList = [NSMutableArray arrayWithArray:[videoList sortedArrayUsingDescriptors:@[sortDescriptor]]];
+    return orderedVideoList;
 }
 
--(NSMutableSet*) getFPSSetFromVideoList:(NSMutableArray*) videoList
+-(NSArray*) getFPSSetFromVideoList:(NSMutableArray*) videoList
 {
     NSMutableArray *fpsOfVideos = [NSMutableArray new];
     
-    for (Video *video in videoList){
-        [fpsOfVideos addObject:video.fps];
+    for (VideoInfo *video in videoList){
+        [fpsOfVideos addObject:[NSNumber numberWithInt:video.fps]];
     }
     NSMutableSet *fpsList = [NSMutableSet setWithArray:fpsOfVideos];
     
-    return fpsList;
+    NSArray *fpss = [fpsList sortedArrayUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"self" ascending:YES]]];
+    return fpss;
 }
 
 
--(NSArray*) getVideoManagedObjects
-{
-    NSError *error = nil;
-    NSFetchRequest *videoFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Video"];
-    NSSortDescriptor *sortVideoByName = [NSSortDescriptor sortDescriptorWithKey:@"filePath" ascending:YES];
-    videoFetchRequest.sortDescriptors = @[sortVideoByName];
-    NSArray *videoArray = [self.persistenceController.managedObjectContext executeFetchRequest:videoFetchRequest error:&error];
-    
-    return videoArray;
-}
+//-(NSArray*) getVideoManagedObjects
+//{
+//    NSError *error = nil;
+//    NSFetchRequest *videoFetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Video"];
+//    NSSortDescriptor *sortVideoByName = [NSSortDescriptor sortDescriptorWithKey:@"filePath" ascending:YES];
+//    videoFetchRequest.sortDescriptors = @[sortVideoByName];
+//    NSArray *videoArray = [self.persistenceController.managedObjectContext executeFetchRequest:videoFetchRequest error:&error];
+//    
+//    return videoArray;
+//}
 
 
 -(void) deleteVideo:(VideoInfo *)video
